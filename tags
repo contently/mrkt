@@ -1,0 +1,61 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Authentication	lib/mrkt/concerns/authentication.rb	/^  module Authentication$/;"	m	class:Mrkt
+Client	lib/mrkt.rb	/^  class Client$/;"	c	class:Mrkt
+Connection	lib/mrkt/concerns/connection.rb	/^  module Connection$/;"	m	class:Mrkt
+CrudActivities	lib/mrkt/concerns/crud_activities.rb	/^  module CrudActivities$/;"	m	class:Mrkt
+CrudCampaigns	lib/mrkt/concerns/crud_campaigns.rb	/^  module CrudCampaigns$/;"	m	class:Mrkt
+CrudHelpers	lib/mrkt/concerns/crud_helpers.rb	/^  module CrudHelpers$/;"	m	class:Mrkt
+CrudLeads	lib/mrkt/concerns/crud_leads.rb	/^  module CrudLeads$/;"	m	class:Mrkt
+CrudLists	lib/mrkt/concerns/crud_lists.rb	/^  module CrudLists$/;"	m	class:Mrkt
+Error	lib/mrkt/errors.rb	/^  class Error < StandardError$/;"	c	class:Mrkt
+FaradayMiddleware	lib/mrkt/faraday_middleware.rb	/^  module FaradayMiddleware$/;"	m	class:Mrkt
+FaradayMiddleware	lib/mrkt/faraday_middleware/response.rb	/^  module FaradayMiddleware$/;"	m	class:Mrkt
+ImportLeads	lib/mrkt/concerns/import_leads.rb	/^  module ImportLeads$/;"	m	class:Mrkt
+Mrkt	lib/mrkt.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/authentication.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/connection.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/crud_activities.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/crud_campaigns.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/crud_helpers.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/crud_leads.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/crud_lists.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/concerns/import_leads.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/errors.rb	/^class Mrkt::Errors$/;"	c
+Mrkt	lib/mrkt/faraday_middleware.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/faraday_middleware/response.rb	/^module Mrkt$/;"	m
+Mrkt	lib/mrkt/version.rb	/^module Mrkt$/;"	m
+Response	lib/mrkt/faraday_middleware/response.rb	/^    class Response < ::FaradayMiddleware::ParseJson$/;"	c	class:Mrkt.FaradayMiddleware
+add_authorization	lib/mrkt/concerns/authentication.rb	/^    def add_authorization(req)$/;"	f	class:Mrkt.Authentication
+add_leads_to_list	lib/mrkt/concerns/crud_lists.rb	/^    def add_leads_to_list(list_id, lead_ids)$/;"	f	class:Mrkt.CrudLists
+associate_lead	lib/mrkt/concerns/crud_leads.rb	/^    def associate_lead(id, cookie)$/;"	f	class:Mrkt.CrudLeads
+authenticate	lib/mrkt/concerns/authentication.rb	/^    def authenticate$/;"	f	class:Mrkt.Authentication
+authenticate!	lib/mrkt/concerns/authentication.rb	/^    def authenticate!$/;"	f	class:Mrkt.Authentication
+authenticated?	lib/mrkt/concerns/authentication.rb	/^    def authenticated?$/;"	f	class:Mrkt.Authentication
+authentication_params	lib/mrkt/concerns/authentication.rb	/^    def authentication_params$/;"	f	class:Mrkt.Authentication
+connection	lib/mrkt/concerns/connection.rb	/^    def connection$/;"	f	class:Mrkt.Connection
+create_class	lib/mrkt/errors.rb	/^  def self.create_class$/;"	F	class:Mrkt
+createupdate_leads	lib/mrkt/concerns/crud_leads.rb	/^    def createupdate_leads(leads, action: 'createOrUpdate', lookup_field: nil, partition_name: nil, async_processing: nil)$/;"	f	class:Mrkt.CrudLeads
+delete_leads	lib/mrkt/concerns/crud_leads.rb	/^    def delete_leads(leads)$/;"	f	class:Mrkt.CrudLeads
+find_by_response_code	lib/mrkt/errors.rb	/^  def self.find_by_response_code(response_code)$/;"	F	class:Mrkt
+get_activity_types	lib/mrkt/concerns/crud_activities.rb	/^    def get_activity_types$/;"	f	class:Mrkt.CrudActivities
+get_leads	lib/mrkt/concerns/crud_activities.rb	/^    def get_leads(filter_type, filter_values, fields: nil, batch_size: nil, next_page_token: nil)$/;"	f	class:Mrkt.CrudActivities
+get_leads	lib/mrkt/concerns/crud_leads.rb	/^    def get_leads(filter_type, filter_values, fields: nil, batch_size: nil, next_page_token: nil)$/;"	f	class:Mrkt.CrudLeads
+get_leads_by_list	lib/mrkt/concerns/crud_lists.rb	/^    def get_leads_by_list(list_id, fields: nil, batch_size: nil, next_page_token: nil)$/;"	f	class:Mrkt.CrudLists
+handle_errors!	lib/mrkt/faraday_middleware/response.rb	/^      def handle_errors!(errors)$/;"	f	class:Mrkt.FaradayMiddleware.Response
+import_lead	lib/mrkt/concerns/import_leads.rb	/^    def import_lead(file, format = 'csv', lookup_field: nil, list_id: nil, partition_name: nil)$/;"	f	class:Mrkt.ImportLeads
+import_lead_failures	lib/mrkt/concerns/import_leads.rb	/^    def import_lead_failures(id)$/;"	f	class:Mrkt.ImportLeads
+import_lead_status	lib/mrkt/concerns/import_leads.rb	/^    def import_lead_status(id)$/;"	f	class:Mrkt.ImportLeads
+import_lead_warnings	lib/mrkt/concerns/import_leads.rb	/^    def import_lead_warnings(id)$/;"	f	class:Mrkt.ImportLeads
+init_connection	lib/mrkt/concerns/connection.rb	/^    def init_connection$/;"	f	class:Mrkt.Connection
+initialize	lib/mrkt.rb	/^    def initialize(options = {})$/;"	f	class:Mrkt.Client
+json_payload	lib/mrkt/concerns/crud_helpers.rb	/^    def json_payload(req, payload)$/;"	f	class:Mrkt.CrudHelpers
+json_stub	spec/support/webmock.rb	/^  def json_stub(content_stub)$/;"	f
+map_lead_ids	lib/mrkt/concerns/crud_helpers.rb	/^    def map_lead_ids(lead_ids)$/;"	f	class:Mrkt.CrudHelpers
+process_response	lib/mrkt/faraday_middleware/response.rb	/^      def process_response(env)$/;"	f	class:Mrkt.FaradayMiddleware.Response
+request_campaign	lib/mrkt/concerns/crud_campaigns.rb	/^    def request_campaign(id, lead_ids, tokens = {})$/;"	f	class:Mrkt.CrudCampaigns
+valid_token?	lib/mrkt/concerns/authentication.rb	/^    def valid_token?$/;"	f	class:Mrkt.Authentication
