@@ -4,24 +4,23 @@ module Mrkt
       get("/rest/v1/activities/types.json")
     end
 
-    #def get_activities(start_date)
-      #activities = []
-      #next_page_token = get_first_paging_token(date: date)
-      #more_data = true
+    def get_activities(first_paging_token, activity_type_ids)
+      activities = []
+      next_page_token = first_paging_token
+      more_data = true
 
-      #while more_data do
-        #endpoint = "/rest/v1/activities.json"
-        #params = { "nextPageToken" => next_page_token }
-        #url = request_url(endpoint, params) + "&" + activity_types
+      while more_data
+        params = { nextPageToken: next_page_token, activityTypeIds: activity_type_ids }
+        response = get("/rest/v1/activities.json", params)
 
-        #response = Typhoeus.get(request_url)
-        #activities = JSON.parse(response.body)
+        result = response[:result] || []
+        activities.push(*result)
 
-        #more_data = activities['moreResult']
-        #next_page_token = activities['nextPageToken']
+        more_data = response[:moreResult]
+        next_page_token = response[:nextPageToken]
+      end
 
-        #activities.append(activities)
-      #end
-    #end
+      activities
+    end
   end
 end

@@ -16,34 +16,13 @@ describe Mrkt::Activities do
               "dataType":"integer"
             },
             "attributes":[
-              {
-                "name":"Client IP Address",
-                "dataType":"string"
-              },
-              {
-                "name":"Query Parameters",
-                "dataType":"string"
-              },
-              {
-                "name":"Referrer URL",
-                "dataType":"string"
-              },
-              {
-                "name":"Search Engine",
-                "dataType":"string"
-              },
-              {
-                "name":"Search Query",
-                "dataType":"string"
-              },
-              {
-                "name":"User Agent",
-                "dataType":"string"
-              },
-              {
-                "name":"Webpage URL",
-                "dataType":"string"
-              }
+              { "name":"Client IP Address", "dataType":"string" },
+              { "name":"Query Parameters", "dataType":"string" },
+              { "name":"Referrer URL", "dataType":"string" },
+              { "name":"Search Engine", "dataType":"string" },
+              { "name":"Search Query", "dataType":"string" },
+              { "name":"User Agent", "dataType":"string" },
+              { "name":"Webpage URL", "dataType":"string" }
             ]
           },
           {
@@ -55,30 +34,12 @@ describe Mrkt::Activities do
               "dataType":"integer"
             },
             "attributes":[
-              {
-                "name":"Client IP Address",
-                "dataType":"string"
-              },
-              {
-                "name":"Form Fields",
-                "dataType":"text"
-              },
-              {
-                "name":"Query Parameters",
-                "dataType":"string"
-              },
-              {
-                "name":"Referrer URL",
-                "dataType":"string"
-              },
-              {
-                "name":"User Agent",
-                "dataType":"string"
-              },
-              {
-                "name":"Webpage ID",
-                "dataType":"integer"
-              }
+              { "name":"Client IP Address", "dataType":"string" },
+              { "name":"Form Fields", "dataType":"text" },
+              { "name":"Query Parameters", "dataType":"string" },
+              { "name":"Referrer URL", "dataType":"string" },
+              { "name":"User Agent", "dataType":"string" },
+              { "name":"Webpage ID", "dataType":"integer" }
             ]
           }
         ]
@@ -95,11 +56,16 @@ describe Mrkt::Activities do
   end
 
   describe '#get_activities' do
-    let(:response_stub) do
+    let(:first_page_token) { "GIYDAOBNGEYS2MBWKQYDAORQGA5DAMBOGAYDAKZQGAYDALBQ" }
+    let(:activity_type_ids) { [1, 12] }
+    let(:first_response_next_page_token) do
+      "GIYDAOBNGEYS2MBWKQYDAORQGA5DAMBOGAYDAKZQGAYDALBRGA3TQ==="
+    end
+    let(:first_response_stub) do
       {
         "requestId":"a9ae#148add1e53d",
         "success":true,
-        "nextPageToken":"GIYDAOBNGEYS2MBWKQYDAORQGA5DAMBOGAYDAKZQGAYDALBRGA3TQ===",
+        "nextPageToken":first_response_next_page_token,
         "moreResult":true,
         "result":[
           {
@@ -109,16 +75,7 @@ describe Mrkt::Activities do
             "activityTypeId":12,
             "primaryAttributeValueId":6,
             "primaryAttributeValue":"Owyliphys Iledil",
-            "attributes":[
-              {
-                "name":"Source Type",
-                "value":"Web page visit"
-              },
-              {
-                "name":"Source Info",
-                "value":"http://search.yahoo.com/search?p=train+cappuccino+army"
-              }
-            ]
+            "attributes":[ { "name":"Source Type", "value":"Web page visit" } ]
           },
           {
             "id":3,
@@ -127,51 +84,90 @@ describe Mrkt::Activities do
             "activityTypeId":1,
             "primaryAttributeValueId":4,
             "primaryAttributeValue":"anti-phishing",
-            "attributes":[
-              {
-                "name":"Query Parameters",
-                "value":null
-              },
-              {
-                "name":"Client IP Address",
-                "value":"203.141.7.100"
-              },
-              {
-                "name":"User Agent",
-                "value":"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.14) Gecko/20080404 Firefox/2.0.0.14"
-              },
-              {
-                "name":"Webpage ID",
-                "value":4
-              },
-              {
-                "name":"Webpage URL",
-                "value":"/anti-phishing.html"
-              },
-              {
-                "name":"Referrer URL",
-                "value":null
-              },
-              {
-                "name":"Search Engine",
-                "value":null
-              },
-              {
-                "name":"Search Query",
-                "value":null
-              }
-            ]
+            "attributes":[ { "name":"Query Parameters", "value":nil } ]
           }
         ]
       }
     end
-    subject { client.get_activities(start_date) }
-
-    before do
-      stub_request(:get, "https://#{host}/rest/v1/activities/types.json")
-        .to_return(json_stub(response_stub))
+    let(:second_response_stub) do
+      {
+        "requestId":"a9ae#148add1e53e",
+        "success":true,
+        "moreResult":false,
+        "result":[
+          {
+            "id":2,
+            "leadId":7,
+            "activityDate":"2013-09-26T06:56:35+0000",
+            "activityTypeId":12,
+            "primaryAttributeValueId":6,
+            "primaryAttributeValue":"Owyliphys Iledil",
+            "attributes":[ { "name":"Source Type", "value":"Web page visit" } ]
+          },
+          {
+            "id":3,
+            "leadId":8,
+            "activityDate":"2013-12-28T00:39:45+0000",
+            "activityTypeId":1,
+            "primaryAttributeValueId":4,
+            "primaryAttributeValue":"anti-phishing",
+            "attributes":[ { "name":"Query Parameters", "value":nil } ]
+          }
+        ]
+      }
+    end
+    let(:expected_combined_result) do
+      [
+        {
+          "id":2,
+          "leadId":6,
+          "activityDate":"2013-09-26T06:56:35+0000",
+          "activityTypeId":12,
+          "primaryAttributeValueId":6,
+          "primaryAttributeValue":"Owyliphys Iledil",
+          "attributes":[ { "name":"Source Type", "value":"Web page visit" } ]
+        },
+        {
+          "id":3,
+          "leadId":9,
+          "activityDate":"2013-12-28T00:39:45+0000",
+          "activityTypeId":1,
+          "primaryAttributeValueId":4,
+          "primaryAttributeValue":"anti-phishing",
+          "attributes":[ { "name":"Query Parameters", "value":nil } ]
+        },
+        {
+          "id":2,
+          "leadId":7,
+          "activityDate":"2013-09-26T06:56:35+0000",
+          "activityTypeId":12,
+          "primaryAttributeValueId":6,
+          "primaryAttributeValue":"Owyliphys Iledil",
+          "attributes":[ { "name":"Source Type", "value":"Web page visit" } ]
+        },
+        {
+          "id":3,
+          "leadId":8,
+          "activityDate":"2013-12-28T00:39:45+0000",
+          "activityTypeId":1,
+          "primaryAttributeValueId":4,
+          "primaryAttributeValue":"anti-phishing",
+          "attributes":[ { "name":"Query Parameters", "value":nil } ]
+        }
+      ]
     end
 
-    xit { is_expected.to eq(response_stub) }
+    subject { client.get_activities(first_page_token, activity_type_ids) }
+
+    before do
+      stub_request(:get, "https://#{host}/rest/v1/activities.json")
+        .with(query: { nextPageToken: first_page_token, activityTypeIds: activity_type_ids })
+        .to_return(json_stub(first_response_stub))
+      stub_request(:get, "https://#{host}/rest/v1/activities.json")
+        .with(query: { nextPageToken: first_response_next_page_token, activityTypeIds: activity_type_ids })
+        .to_return(json_stub(second_response_stub))
+    end
+
+    it { is_expected.to eq(expected_combined_result) }
   end
 end
