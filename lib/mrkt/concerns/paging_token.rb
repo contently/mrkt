@@ -3,7 +3,7 @@ module Mrkt
     def get_paging_token(date)
       params = { sinceDatetime: format_date(date) }
 
-      get("/rest/v1/pagingtoken.json", params)[:nextPageToken]
+      get("/rest/v1/activities/pagingtoken.json", params)[:nextPageToken]
     end
 
     private

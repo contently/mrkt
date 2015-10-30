@@ -14,7 +14,7 @@ describe Mrkt::CrudLeads do
     subject { client.get_paging_token(date) }
 
     before do
-      stub_request(:get, "https://#{host}/rest/v1/pagingtoken.json")
+      stub_request(:get, "https://#{host}/rest/v1/activities/pagingtoken.json")
         .with(query: { sinceDatetime: date.strftime("%FT%T") })
         .to_return(json_stub(response_stub))
     end
