@@ -4,7 +4,7 @@ module Mrkt
       get("/rest/v1/activities/types.json")
     end
 
-    def get_activities(first_paging_token, activity_type_ids)
+    def get_activities(first_paging_token, date, activity_type_ids)
       activities = []
       next_page_token = first_paging_token
       more_data = true
@@ -14,6 +14,15 @@ module Mrkt
         response = get("/rest/v1/activities.json", params)
 
         result = response[:result] || []
+
+        if Date.parse(result.last[:activityDate]) > date
+          result.reject! do |activity|
+            Date.parse(activity[:activityDate]) > date
+          end
+          activities.push(*result)
+          break
+        end
+
         activities.push(*result)
 
         more_data = response[:moreResult]
