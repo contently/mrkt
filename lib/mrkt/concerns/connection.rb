@@ -7,7 +7,7 @@ module Mrkt
     end
 
     def init_connection
-      Faraday.new(url: "https://#{@host}", params_encoder: Faraday::FlatParamsEncoder) do |conn|
+      Faraday.new(url: "https://#{@host}") do |conn|
         conn.request :multipart
         conn.request :url_encoded
 
@@ -16,6 +16,7 @@ module Mrkt
 
         conn.options.timeout = @options[:read_timeout] if @options.key?(:read_timeout)
         conn.options.open_timeout = @options[:open_timeout] if @options.key?(:open_timeout)
+        conn.options.params_encoder = Faraday::FlatParamsEncoder
 
         conn.adapter Faraday.default_adapter
       end
