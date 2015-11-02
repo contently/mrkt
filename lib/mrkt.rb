@@ -39,6 +39,7 @@ module Mrkt
         authenticate!
 
         resp = connection.send(http_method, path, payload) do |req|
+          req.options.params_encoder = Faraday::FlatParamsEncoder
           add_authorization(req)
           block.call(req) unless block.nil?
         end

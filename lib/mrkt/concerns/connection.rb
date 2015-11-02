@@ -16,7 +16,6 @@ module Mrkt
 
         conn.options.timeout = @options[:read_timeout] if @options.key?(:read_timeout)
         conn.options.open_timeout = @options[:open_timeout] if @options.key?(:open_timeout)
-        conn.options.params_encoder = Faraday::FlatParamsEncoder
 
         conn.adapter Faraday.default_adapter
       end

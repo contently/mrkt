@@ -163,11 +163,10 @@ describe Mrkt::Activities do
       subject { client.get_activities(first_page_token, date, activity_type_ids) }
 
       before do
-        stub_request(:get, "https://#{host}/rest/v1/activities.json")
-          .with(query: { nextPageToken: first_page_token, activityTypeIds: activity_type_ids })
+        activity_type_ids_params = activity_type_ids.map { |id| "activityTypeIds=#{id}" }.join("&")
+        stub_request(:get, "https://#{host}/rest/v1/activities.json?nextPageToken=#{first_page_token}&#{activity_type_ids_params}")
           .to_return(json_stub(first_response_stub))
-        stub_request(:get, "https://#{host}/rest/v1/activities.json")
-          .with(query: { nextPageToken: first_response_next_page_token, activityTypeIds: activity_type_ids })
+        stub_request(:get, "https://#{host}/rest/v1/activities.json?nextPageToken=#{first_response_next_page_token}&#{activity_type_ids_params}")
           .to_return(json_stub(second_response_stub))
       end
 
@@ -240,11 +239,10 @@ describe Mrkt::Activities do
       subject { client.get_activities(first_page_token, date, activity_type_ids) }
 
       before do
-        stub_request(:get, "https://#{host}/rest/v1/activities.json")
-          .with(query: { nextPageToken: first_page_token, activityTypeIds: activity_type_ids })
+        activity_type_ids_params = activity_type_ids.map { |id| "activityTypeIds=#{id}" }.join("&")
+        stub_request(:get, "https://#{host}/rest/v1/activities.json?nextPageToken=#{first_page_token}&#{activity_type_ids_params}")
           .to_return(json_stub(first_response_stub))
-        stub_request(:get, "https://#{host}/rest/v1/activities.json")
-          .with(query: { nextPageToken: first_response_next_page_token, activityTypeIds: activity_type_ids })
+        stub_request(:get, "https://#{host}/rest/v1/activities.json?nextPageToken=#{first_response_next_page_token}&#{activity_type_ids_params}")
           .to_return(json_stub(second_response_stub))
       end
 
