@@ -4,6 +4,7 @@ require 'mrkt/errors'
 require 'mrkt/concerns/connection'
 require 'mrkt/concerns/authentication'
 require 'mrkt/concerns/activities'
+require 'mrkt/concerns/opportunities'
 require 'mrkt/concerns/paging_token'
 require 'mrkt/concerns/crud_helpers'
 require 'mrkt/concerns/crud_campaigns'
@@ -22,6 +23,7 @@ module Mrkt
     include CrudLeads
     include CrudLists
     include ImportLeads
+    include Opportunities
 
     attr_accessor :debug
 
