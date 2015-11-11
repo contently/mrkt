@@ -11,5 +11,9 @@ module Mrkt
 
       get('/rest/v1/opportunities.json', params)
     end
+
+    def describe_opportunity
+      get('/rest/v1/opportunities/describe.json')
+    end
   end
 end
