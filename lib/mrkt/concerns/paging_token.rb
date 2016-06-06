@@ -15,7 +15,7 @@ module Mrkt
         fail ArgumentError.new("Expected Date or String. Got #{date.class}")
       end
 
-      date.strftime("%FT%T")
+      date.strftime("%FT%T%z")
     end
   end
 end
